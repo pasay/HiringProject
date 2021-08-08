@@ -1,10 +1,11 @@
-﻿using HiringProject.Model.Controllers.Companies.Requests;
+﻿using HiringProject.Model.Commands.Companies;
+using HiringProject.Model.Controllers.Companies.Requests;
 using HiringProject.Model.Controllers.Companies.Responses;
-using Microsoft.AspNetCore.Http;
+using HiringProject.Model.Queries.Companies;
+using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HiringProject.Api.Controllers
@@ -13,29 +14,44 @@ namespace HiringProject.Api.Controllers
     [ApiController]
     public class CompaniesController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        public CompaniesController(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
 
         [HttpGet("all")]
-        public async Task<ActionResult<List<CompanyInfoResponse>>> Get()
+        [ProducesResponseType(200, Type = typeof(List<CompanyInfoResponse>))]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var inRequest = new GetAllCompaniesQuery();
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<CompanyInfoResponse>> Get([FromRoute] GetCompanyIdRequest request)
+        [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
+        public async Task<IActionResult> Get([FromRoute] GetCompanyIdRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<GetCompanyFromIdQuery>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ActionResult<CompanyInfoResponse>> Delete([FromRoute] DeleteCompanyIdRequest request)
+        public async Task<IActionResult> Delete([FromRoute] DeleteCompanyIdRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<DeleteCompanyFromIdCommand>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpPost]
-        public async Task<ActionResult<CompanyInfoResponse>> Post([FromBody] PostCompanyRequest request)
+        [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
+        public async Task<IActionResult> Post([FromBody] PostCompanyRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<NewCompanyCommand>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
     }
 }

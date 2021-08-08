@@ -1,13 +1,12 @@
 ﻿using HiringProject.Data.DataContext;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using MongoDB.Bson;
+using HiringProject.Data.Models;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
-using HiringProject.Data.Models;
-using System.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace HiringProject.Data.Repositories.Imp
 {

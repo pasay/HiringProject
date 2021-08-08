@@ -1,14 +1,6 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HiringProject.Data.Models
+﻿namespace HiringProject.Data.Models
 {
-    public class Company: MongoDbEntity
+    public class Company : MongoDbEntity
     {
         public string Name { get; set; }
         public string Address { get; set; }

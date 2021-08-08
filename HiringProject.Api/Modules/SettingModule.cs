@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using HiringProject.Api.Settings;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using HiringProject.Api.Settings;
 
 namespace HiringProject.Api.Modules
 {

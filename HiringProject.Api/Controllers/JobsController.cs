@@ -1,10 +1,11 @@
-﻿using HiringProject.Model.Controllers.Jobs.Requests;
+﻿using HiringProject.Model.Commands.Jobs;
+using HiringProject.Model.Controllers.Jobs.Requests;
 using HiringProject.Model.Controllers.Jobs.Responses;
-using Microsoft.AspNetCore.Http;
+using HiringProject.Model.Queries.Jobs;
+using MapsterMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HiringProject.Api.Controllers
@@ -13,34 +14,52 @@ namespace HiringProject.Api.Controllers
     [ApiController]
     public class JobsController : ControllerBase
     {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        public JobsController(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
 
         [HttpGet("all")]
-        public async Task<ActionResult<List<JobInfoResponse>>> Get()
+        [ProducesResponseType(200, Type = typeof(List<JobInfoResponse>))]
+        public async Task<IActionResult> Get()
         {
-            return Ok();
+            var inRequest = new GetAllJobsQuery();
+            return Ok(await _mediator.Send(inRequest));
         }
+
         [HttpGet("all/{CompanyId}")]
-        public async Task<ActionResult<List<JobInfoResponse>>> Get([FromRoute] GetAllJobRequest request)
+        [ProducesResponseType(200, Type = typeof(List<JobInfoResponse>))]
+        public async Task<IActionResult> Get([FromRoute] GetAllJobRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<GetAllJobsFromCompanyIdQuery>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpGet("{Id}")]
-        public async Task<ActionResult<JobInfoResponse>> Get([FromRoute] GetJobIdRequest request)
+        [ProducesResponseType(200, Type = typeof(JobInfoResponse))]
+        public async Task<IActionResult> Get([FromRoute] GetJobIdRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<GetJobFromIdQuery>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpDelete("{Id}")]
-        public async Task<ActionResult<JobInfoResponse>> Delete([FromRoute] DeleteJobIdRequest request)
+        public async Task<IActionResult> Delete([FromRoute] DeleteJobIdRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<DeleteJobFromIdCommand>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
 
         [HttpPost]
-        public async Task<ActionResult<JobInfoResponse>> Post([FromBody] PostJobRequest request)
+        [ProducesResponseType(200, Type = typeof(JobInfoResponse))]
+        public async Task<IActionResult> Post([FromBody] PostJobRequest request)
         {
-            return Ok();
+            var inRequest = _mapper.Map<NewJobCommand>(request);
+            return Ok(await _mediator.Send(inRequest));
         }
     }
 }

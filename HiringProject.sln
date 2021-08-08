@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiringProject.Model", "Hiri
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiringProject.Data", "HiringProject.Data\HiringProject.Data.csproj", "{D001EE5A-8F73-405F-92E4-194A0EA4703D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiringProject.Business", "HiringProject.Business\HiringProject.Business.csproj", "{F78257FF-54E5-4921-A1E6-24A6603C1EF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{D001EE5A-8F73-405F-92E4-194A0EA4703D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D001EE5A-8F73-405F-92E4-194A0EA4703D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D001EE5A-8F73-405F-92E4-194A0EA4703D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F78257FF-54E5-4921-A1E6-24A6603C1EF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78257FF-54E5-4921-A1E6-24A6603C1EF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78257FF-54E5-4921-A1E6-24A6603C1EF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78257FF-54E5-4921-A1E6-24A6603C1EF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

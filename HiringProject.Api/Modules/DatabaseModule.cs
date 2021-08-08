@@ -1,14 +1,12 @@
-using System;
-using System.Reflection;
 using HiringProject.Api.Settings;
 using HiringProject.Data.DataContext;
 using HiringProject.Data.DataContext.Imp;
 using HiringProject.Data.Repositories;
 using HiringProject.Data.Repositories.Imp;
-using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
+using System;
 
 namespace HiringProject.Api.Modules
 {

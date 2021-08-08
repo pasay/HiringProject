@@ -41,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HiringProject.Business\HiringProject.Business.csproj" />
     <ProjectReference Include="..\HiringProject.Data\HiringProject.Data.csproj" />
     <ProjectReference Include="..\HiringProject.Model\HiringProject.Model.csproj" />
   </ItemGroup>
