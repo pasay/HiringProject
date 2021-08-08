@@ -2,13 +2,15 @@ using HiringProject.Api;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace HiringProject.Test
 {
     public static class Helper
     {
-        public static IHost CreateHost()
+        public static IHost CreateHost(Action<IServiceCollection> mockServicesConfiguration)
         {
             var hostBuilder = new HostBuilder()
                .ConfigureWebHost(webHost =>
@@ -23,7 +25,7 @@ namespace HiringProject.Test
 
                    webHost.UseConfiguration(integrationConfig);
 
-                   webHost.UseStartup<Startup>();
+                   webHost.UseStartup<Startup>().ConfigureTestServices(mockServicesConfiguration);
                });
 
             return hostBuilder.StartAsync().GetAwaiter().GetResult();

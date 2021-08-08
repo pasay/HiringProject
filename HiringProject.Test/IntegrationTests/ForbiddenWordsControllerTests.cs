@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Net.Http;
 using System.Text;
@@ -7,6 +8,7 @@ using HiringProject.Data.Models;
 using HiringProject.Data.Repositories;
 using HiringProject.Model.Controllers.ForbiddenWords.Requests;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
@@ -15,17 +17,27 @@ namespace HiringProject.Test.IntegrationTests
 {
     public class ForbiddenWordsControllerTests
     {
-        private readonly IHost host = Helper.CreateHost();
-        private readonly Mock<IForbiddenWordRepository> forbiddenWordRepository;
+        private readonly IHost host;
+        private static Mock<IForbiddenWordRepository> repository;
         public ForbiddenWordsControllerTests()
         {
-            forbiddenWordRepository = new Mock<IForbiddenWordRepository>();
-            forbiddenWordRepository.Setup(x => x.AddAsync(It.IsAny<ForbiddenWord>())).Returns((ForbiddenWord source) => Task.FromResult(source));
-            forbiddenWordRepository.Setup(x => x.UpdateByIdAsync(It.IsAny<string>(), It.IsAny<ForbiddenWord>())).Returns((string id, ForbiddenWord source) => Task.FromResult(source));
-            forbiddenWordRepository.Setup(x => x.UpdateExpressionAsync(It.IsAny<ForbiddenWord>(), It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((ForbiddenWord source, Expression<Func<ForbiddenWord, bool>> exp) => Task.FromResult(source));
-            forbiddenWordRepository.Setup(x => x.DeleteAsync(It.IsAny<ForbiddenWord>())).Returns((ForbiddenWord source) => Task.FromResult(source));
-            forbiddenWordRepository.Setup(x => x.DeleteByIdAsync(It.IsAny<string>())).Returns((string source) => Task.FromResult(new ForbiddenWord() { Id = source, Word = source }));
-            forbiddenWordRepository.Setup(x => x.DeleteExpressionAsync(It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((Expression<Func<ForbiddenWord, bool>> source) => Task.FromResult(default(ForbiddenWord)));
+            repository = new Mock<IForbiddenWordRepository>();
+            repository.Setup(x => x.GetAsync(It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((Expression<Func<ForbiddenWord, bool>> source) => Task.FromResult((IEnumerable<ForbiddenWord>)(new List<ForbiddenWord>())));
+            repository.Setup(x => x.FirstOrDefaultAsync(It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((Expression<Func<ForbiddenWord, bool>> source) => Task.FromResult(default(ForbiddenWord)));
+            repository.Setup(x => x.GetByIdAsync(It.IsAny<string>())).Returns((string source) => Task.FromResult(new ForbiddenWord()));
+            repository.Setup(x => x.AddAsync(It.IsAny<ForbiddenWord>())).Returns((ForbiddenWord source) => Task.FromResult(source));
+            repository.Setup(x => x.UpdateByIdAsync(It.IsAny<string>(), It.IsAny<ForbiddenWord>())).Returns((string id, ForbiddenWord source) => Task.FromResult(source));
+            repository.Setup(x => x.UpdateExpressionAsync(It.IsAny<ForbiddenWord>(), It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((ForbiddenWord source, Expression<Func<ForbiddenWord, bool>> exp) => Task.FromResult(source));
+            repository.Setup(x => x.DeleteAsync(It.IsAny<ForbiddenWord>())).Returns((ForbiddenWord source) => Task.FromResult(source));
+            repository.Setup(x => x.DeleteByIdAsync(It.IsAny<string>())).Returns((string source) => Task.FromResult(new ForbiddenWord() { Id = source, Word = source }));
+            repository.Setup(x => x.DeleteExpressionAsync(It.IsAny<Expression<Func<ForbiddenWord, bool>>>())).Returns((Expression<Func<ForbiddenWord, bool>> source) => Task.FromResult(new ForbiddenWord()));
+
+            host = Helper.CreateHost(ConfigureTestServices);
+        }
+
+        private static void ConfigureTestServices(IServiceCollection services)
+        {
+            services.AddScoped<IForbiddenWordRepository>(p => repository.Object);
         }
 
         [Theory]
