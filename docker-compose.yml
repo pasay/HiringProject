@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  hiringproject.api:
+    image: ${DOCKER_REGISTRY-}hiringprojectapi
+    build:
+      context: .
+      dockerfile: HiringProject.Api/Dockerfile
