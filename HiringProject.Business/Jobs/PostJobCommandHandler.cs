@@ -1,8 +1,10 @@
-﻿using HiringProject.Data.Models;
+﻿using HiringProject.Business.Rules;
+using HiringProject.Data.Models;
 using HiringProject.Data.Repositories;
 using HiringProject.Exceptions;
 using HiringProject.Model.Commands.Jobs;
 using HiringProject.Model.Controllers.Jobs.Responses;
+using HiringProject.Model.Enums;
 using MapsterMapper;
 using MediatR;
 using MongoDB.Bson;
@@ -15,26 +17,30 @@ using System.Threading.Tasks;
 
 namespace HiringProject.Business.Jobs
 {
-    public class NewJobCommandHandler : IRequestHandler<NewJobCommand, JobInfoResponse>
+    public class PostJobCommandHandler : IRequestHandler<PostJobCommand, JobInfoResponse>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWorkRepository _unitOfWork;
+        private readonly IJobQualityRuleCalculator _jobQualityRuleCalculator;
 
-        public NewJobCommandHandler(IMapper mapper, IUnitOfWorkRepository unitOfWork)
+        public PostJobCommandHandler(IMapper mapper, IUnitOfWorkRepository unitOfWork, IJobQualityRuleCalculator jobQualityRuleCalculator)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            _jobQualityRuleCalculator = jobQualityRuleCalculator;
         }
 
-        public async Task<JobInfoResponse> Handle(NewJobCommand request, CancellationToken cancellationToken)
+        public async Task<JobInfoResponse> Handle(PostJobCommand request, CancellationToken cancellationToken)
         {
-            var company = (await _unitOfWork.CompanyRepository.FirstOrDefaultAsync(p => p.Id == request.CompanyId));
+            var company = (await _unitOfWork.CompanyRepository.GetByIdAsync(request.CompanyId));
             if (company == null)
             {
                 throw new DataNotFoundException(nameof(request.CompanyId), request.CompanyId);
             }
             var job = _mapper.Map<Job>(request);
-            //TODO: Rules eklenecek.
+            job.QualityScore = await _jobQualityRuleCalculator.CalculateQuality(request);
+            job.JobStatus = (int)JobStatusEnum.Created;
+
             var result = await _unitOfWork.JobRepository.AddAsync(job);
 
             return _mapper.Map<JobInfoResponse>(result);

@@ -20,7 +20,7 @@ namespace Morhipo.Marketplace.External.API.Validations.Categories
                 .Length(10, 12) //Daha detaylý regex yapýlabilir. Þimdilik 10(Yerel) karakter ile 12(Uluslararasý) karakter arasý düþünülerek hareket edildi.
                 ;
 
-            RuleFor(r => r.MaxPublishJobCount)
+            RuleFor(r => r.RemainPublishJobCount)
                 .NotEmpty()
                 .GreaterThan(0)
                 ;

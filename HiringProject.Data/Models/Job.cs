@@ -13,5 +13,7 @@ namespace HiringProject.Data.Models
         public string FringeBenefits { get; set; }
         public string WorkType { get; set; }
         public int Salary { get; set; }
+        public int QualityScore { get; set; }
+        public int JobStatus { get; set; }
     }
 }

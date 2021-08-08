@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HiringProject.Model.Enums;
+using System;
 
 namespace HiringProject.Model.Controllers.Jobs.Responses
 {
@@ -12,5 +13,7 @@ namespace HiringProject.Model.Controllers.Jobs.Responses
         public string FringeBenefits { get; set; }
         public string WorkType { get; set; }
         public int Salary { get; set; }
+        public int QualityScore { get; set; }
+        public JobStatusEnum JobStatus { get; set; }
     }
 }

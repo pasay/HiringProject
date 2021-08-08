@@ -6,5 +6,6 @@ namespace HiringProject.Data.Repositories
     {
         ICompanyRepository CompanyRepository { get; }
         IJobRepository JobRepository { get; }
+        IForbiddenWordRepository ForbiddenWordRepository { get; }
     }
 }

@@ -1,3 +1,6 @@
+using HiringProject.Api.Extensions;
+using HiringProject.Business.Rules;
+using HiringProject.Business.Rules.Imp;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,12 +12,21 @@ namespace HiringProject.Api.Modules
     {
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddMediatR(typeof(Startup));
             var assembly = AppDomain.CurrentDomain.Load("HiringProject.Business");
-            services.AddMediatR(assembly);
+            
+            return services
+                    .AddMediatR(typeof(Startup))
+                    .AddMediatR(assembly)
+                    .AddRules()
+                    ;
+        }
+        private static IServiceCollection AddRules(this IServiceCollection services)
+        {
 
-
-            return services;
+            return services
+                    .RegisterAllTypes<IJobQualityRule>(new[] { typeof(IJobQualityRule).Assembly })
+                    .AddTransient<IJobQualityRuleCalculator, JobQualityRuleCalculator>()
+                    ;
         }
     }
 }

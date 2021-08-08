@@ -20,11 +20,6 @@ namespace Morhipo.Marketplace.External.API.Validations.Jobs
             RuleFor(r => r.Description)
                 .NotEmpty()
                 ;
-
-            RuleFor(r => r.TimeToLive)
-                .NotEmpty()
-                .GreaterThan(DateTime.Now)
-                ;
         }
     }
 }

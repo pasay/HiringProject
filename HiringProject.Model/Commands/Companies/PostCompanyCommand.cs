@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HiringProject.Model.Commands.Companies
 {
-    public class NewCompanyCommand : IRequest<CompanyInfoResponse>
+    public class PostCompanyCommand : IRequest<CompanyInfoResponse>
     {
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
-        public int MaxPublishJobCount { get; set; } = 2;
+        public int RemainPublishJobCount { get; set; } = 2;
     }
 }

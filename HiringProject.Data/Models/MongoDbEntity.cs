@@ -8,6 +8,6 @@ namespace HiringProject.Data.Models
         [BsonRepresentation(BsonType.String)]
         [BsonId]
         [BsonElement(Order = 0)]
-        public string Id { get; } = ObjectId.GenerateNewId().ToString();
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
     }
 }

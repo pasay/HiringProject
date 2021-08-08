@@ -51,7 +51,15 @@ namespace HiringProject.Api.Controllers
         [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
         public async Task<IActionResult> Post([FromBody] PostCompanyRequest request)
         {
-            var inRequest = _mapper.Map<NewCompanyCommand>(request);
+            var inRequest = _mapper.Map<PostCompanyCommand>(request);
+            return Ok(await _mediator.Send(inRequest));
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
+        public async Task<IActionResult> Put([FromBody] PutCompanyRemainPublishJobCountRequest request)
+        {
+            var inRequest = _mapper.Map<PutCompanyRemainPublishJobCountCommand>(request);
             return Ok(await _mediator.Send(inRequest));
         }
     }

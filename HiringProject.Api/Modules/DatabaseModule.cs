@@ -27,6 +27,7 @@ namespace HiringProject.Api.Modules
             services.AddScoped<IDbContext, HiringProjectMongoDbContext>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
+            services.AddScoped<IForbiddenWordRepository, ForbiddenWordRepository>();
             services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
 
             return services;

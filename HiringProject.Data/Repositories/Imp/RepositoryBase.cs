@@ -22,16 +22,16 @@ namespace HiringProject.Data.Repositories.Imp
             _collection = context.GetCollection<T>();
         }
 
-        public virtual async Task<IQueryable<T>> GetAsync(Expression<Func<T, bool>> predicate = null)
+        public virtual async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> predicate = null)
         {
-            return await Task.FromResult(predicate == null
+            return await (predicate == null
                 ? _collection.AsQueryable()
-                : _collection.AsQueryable().Where(predicate));
+                : _collection.AsQueryable().Where(predicate))
+                .ToListAsync();
         }
 
         public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
-            //return await _collection.Find(predicate);
             return await (predicate == null
                 ? _collection.AsQueryable()
                 : _collection.AsQueryable().Where(predicate))
@@ -40,8 +40,6 @@ namespace HiringProject.Data.Repositories.Imp
 
         public virtual async Task<T> GetByIdAsync(string id)
         {
-            //var @event = await _collection.Find($"{{ _id: string('{id.ToString()}') }}").SingleAsync();
-            //var res = _collection.Find(Builders<T>.Filter.Eq("_id", id)).FirstOrDefaultAsync();
             return await FirstOrDefaultAsync(x => x.Id == id);
         }
 
@@ -60,12 +58,14 @@ namespace HiringProject.Data.Repositories.Imp
 
         public virtual async Task<T> UpdateAsync(string id, T entity)
         {
-            return await _collection.FindOneAndReplaceAsync(x => x.Id == id, entity);
+            return await UpdateAsync(entity, x => x.Id == id);
         }
 
         public virtual async Task<T> UpdateAsync(T entity, Expression<Func<T, bool>> predicate)
         {
-            return await _collection.FindOneAndReplaceAsync(predicate, entity);
+            await _collection.ReplaceOneAsync(predicate, entity);
+
+            return await FirstOrDefaultAsync(predicate);
         }
 
         public virtual async Task<T> DeleteAsync(T entity)

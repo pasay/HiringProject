@@ -14,18 +14,18 @@ using System.Threading.Tasks;
 
 namespace HiringProject.Business.Companies
 {
-    public class NewCompanyCommandHandler : IRequestHandler<NewCompanyCommand, CompanyInfoResponse>
+    public class PostCompanyCommandHandler : IRequestHandler<PostCompanyCommand, CompanyInfoResponse>
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWorkRepository _unitOfWork;
 
-        public NewCompanyCommandHandler(IMapper mapper, IUnitOfWorkRepository unitOfWork)
+        public PostCompanyCommandHandler(IMapper mapper, IUnitOfWorkRepository unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CompanyInfoResponse> Handle(NewCompanyCommand request, CancellationToken cancellationToken)
+        public async Task<CompanyInfoResponse> Handle(PostCompanyCommand request, CancellationToken cancellationToken)
         {
             var company = (await _unitOfWork.CompanyRepository.FirstOrDefaultAsync(p => p.PhoneNumber == request.PhoneNumber));
             if (company != null)
@@ -33,7 +33,6 @@ namespace HiringProject.Business.Companies
                 throw new AlreadyExistsException(nameof(company.Id), company.Id.ToString());
             }
             company = _mapper.Map<Company>(request);
-            //TODO: Rules eklenecek.
             var result = await _unitOfWork.CompanyRepository.AddAsync(company);
 
             return _mapper.Map<CompanyInfoResponse>(result);
