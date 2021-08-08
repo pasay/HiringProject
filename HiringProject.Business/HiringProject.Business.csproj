@@ -4,4 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HiringProject.Data\HiringProject.Data.csproj" />
+    <ProjectReference Include="..\HiringProject.Exceptions\HiringProject.Exceptions.csproj" />
+    <ProjectReference Include="..\HiringProject.Model\HiringProject.Model.csproj" />
+  </ItemGroup>
+
 </Project>

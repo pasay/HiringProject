@@ -5,6 +5,7 @@ using HiringProject.Data.Repositories;
 using HiringProject.Data.Repositories.Imp;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using System;
 
@@ -16,7 +17,7 @@ namespace HiringProject.Api.Modules
         {
             services.AddScoped<IMongoDatabase>(provider =>
             {
-                var settings = provider.GetService<MongoDbConnectionSettings>();
+                var settings = provider.GetRequiredService<IOptions<MongoDbConnectionSettings>>().Value;
                 var client = new MongoClient(settings.ConnectionString);
                 if (client == null)
                     throw new NotImplementedException();
@@ -26,7 +27,7 @@ namespace HiringProject.Api.Modules
             services.AddScoped<IDbContext, HiringProjectMongoDbContext>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IJobRepository, JobRepository>();
-            services.AddScoped<IUnitOfWorkRepository, IUnitOfWorkRepository>();
+            services.AddScoped<IUnitOfWorkRepository, UnitOfWorkRepository>();
 
             return services;
         }

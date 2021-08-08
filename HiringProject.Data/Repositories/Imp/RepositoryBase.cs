@@ -21,21 +21,21 @@ namespace HiringProject.Data.Repositories.Imp
             _collection = context.GetCollection<T>();
         }
 
-        public virtual IQueryable<T> Get(Expression<Func<T, bool>> predicate = null)
+        public virtual async Task<IQueryable<T>> GetAsync(Expression<Func<T, bool>> predicate = null)
         {
-            return predicate == null
+            return await Task.FromResult(predicate == null
                 ? _collection.AsQueryable()
-                : _collection.AsQueryable().Where(predicate);
+                : _collection.AsQueryable().Where(predicate));
         }
 
-        public virtual Task<T> GetAsync(Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
-            return _collection.Find(predicate).FirstOrDefaultAsync();
+            return await _collection.Find(predicate).FirstOrDefaultAsync();
         }
 
-        public virtual Task<T> GetByIdAsync(string id)
+        public virtual async Task<T> GetByIdAsync(string id)
         {
-            return _collection.Find(x => x.Id == id).FirstOrDefaultAsync();
+            return await FirstOrDefaultAsync(x=> x.Id == id);
         }
 
         public virtual async Task<T> AddAsync(T entity)

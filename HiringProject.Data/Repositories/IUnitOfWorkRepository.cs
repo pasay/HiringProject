@@ -2,7 +2,7 @@
 
 namespace HiringProject.Data.Repositories
 {
-    public interface IUnitOfWorkRepository : IDisposable
+    public interface IUnitOfWorkRepository
     {
         ICompanyRepository CompanyRepository { get; }
         IJobRepository JobRepository { get; }

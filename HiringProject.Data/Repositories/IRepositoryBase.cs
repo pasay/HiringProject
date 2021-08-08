@@ -9,8 +9,8 @@ namespace HiringProject.Data.Repositories
 {
     public interface IRepositoryBase<T> where T : class, IEntity, new()
     {
-        IQueryable<T> Get(Expression<Func<T, bool>> predicate = null);
-        Task<T> GetAsync(Expression<Func<T, bool>> predicate);
+        Task<IQueryable<T>> GetAsync(Expression<Func<T, bool>> predicate = null);
+        Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate);
         Task<T> GetByIdAsync(string id);
         Task<T> AddAsync(T entity);
         Task<bool> AddRangeAsync(IEnumerable<T> entities);

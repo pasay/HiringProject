@@ -9,7 +9,6 @@ namespace Morhipo.Marketplace.External.API.Validations.Jobs
         {
             RuleFor(r => r.Id)
                 .NotEmpty()
-                .GreaterThan(0)
                 ;
         }
     }
