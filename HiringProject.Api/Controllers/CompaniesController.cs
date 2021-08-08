@@ -28,7 +28,8 @@ namespace HiringProject.Api.Controllers
         public async Task<IActionResult> Get()
         {
             var inRequest = new GetAllCompaniesQuery();
-            return Ok(await _mediator.Send(inRequest));
+            var result = await _mediator.Send(inRequest);
+            return Ok(result);
         }
 
         [HttpGet("{Id}")]

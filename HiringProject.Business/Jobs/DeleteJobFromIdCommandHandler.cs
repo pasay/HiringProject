@@ -3,6 +3,7 @@ using HiringProject.Model.Commands.Jobs;
 using HiringProject.Model.Controllers.Jobs.Responses;
 using MapsterMapper;
 using MediatR;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;

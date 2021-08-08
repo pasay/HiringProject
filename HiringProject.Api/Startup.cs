@@ -35,6 +35,7 @@ namespace HiringProject.Api
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddControllers().AddNewtonsoftJson(p => p.SerializerSettings.Converters.Add(new StringEnumConverter()));
+            services.AddOptions();
             services.Configure<RouteOptions>(options =>
             {
                 options.LowercaseUrls = true;

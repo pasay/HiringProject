@@ -1,3 +1,5 @@
+using HiringProject.Model.Controllers;
+using MapsterMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,10 +13,12 @@ namespace HiringProject.Api.Middlewares
     public class ErrorHandlingMiddleware : IMiddleware
     {
         private readonly ILogger _logger;
+        private readonly IMapper _mapper;
 
-        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
+        public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger, IMapper mapper)
         {
             _logger = logger;
+            _mapper = mapper;
         }
 
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
@@ -31,25 +35,13 @@ namespace HiringProject.Api.Middlewares
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            var message = "Internal Server Error";
-            var statusCode = System.Net.HttpStatusCode.InternalServerError;
+            var response = _mapper.Map<CustomHttpResponse>(ex);
 
-            if (ex is UnauthorizedAccessException)
-            {
-                message = "Unauthorized Access. " + ex.Message;
-                statusCode = System.Net.HttpStatusCode.Unauthorized;
-            }
-            else if (ex is ValidationException)
-            {
-                message = ex.Message;
-                statusCode = System.Net.HttpStatusCode.BadRequest;
-            }
-
-            _logger?.LogError(ex, $"Message:{message} - StatusCode:{statusCode} - [Detail]{ex.Message}");
+            _logger?.LogError(ex, Newtonsoft.Json.JsonConvert.SerializeObject(response));
 
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)statusCode;
-            await context.Response.WriteAsync(message);
+            context.Response.StatusCode = (int)response.StatusCode;
+            await context.Response.WriteAsync(response.Message);
         }
     }
 

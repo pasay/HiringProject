@@ -5,7 +5,7 @@ namespace HiringProject.Data.Models
 {
     public abstract class MongoDbEntity : IEntity<string>
     {
-        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonRepresentation(BsonType.String)]
         [BsonId]
         [BsonElement(Order = 0)]
         public string Id { get; } = ObjectId.GenerateNewId().ToString();

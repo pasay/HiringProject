@@ -17,12 +17,12 @@ namespace HiringProject.Api.Modules
         {
             services.AddScoped<IMongoDatabase>(provider =>
             {
-                var settings = provider.GetRequiredService<IOptions<MongoDbConnectionSettings>>().Value;
-                var client = new MongoClient(settings.ConnectionString);
+                var mongoDbConnectionSettings = provider.GetService<IOptions<MongoDbConnectionSettings>>().Value;
+                var client = new MongoClient(mongoDbConnectionSettings.ConnectionString);
                 if (client == null)
                     throw new NotImplementedException();
 
-                return client.GetDatabase(settings.Database);
+                return client.GetDatabase(mongoDbConnectionSettings.Database);
             });
             services.AddScoped<IDbContext, HiringProjectMongoDbContext>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();

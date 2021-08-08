@@ -1,12 +1,20 @@
+using FluentValidation;
+using HiringProject.Data.Models;
+using HiringProject.Exceptions;
 using HiringProject.Model.Commands.Companies;
 using HiringProject.Model.Commands.Jobs;
+using HiringProject.Model.Controllers;
 using HiringProject.Model.Controllers.Companies.Requests;
+using HiringProject.Model.Controllers.Companies.Responses;
 using HiringProject.Model.Controllers.Jobs.Requests;
+using HiringProject.Model.Controllers.Jobs.Responses;
 using HiringProject.Model.Queries.Companies;
 using HiringProject.Model.Queries.Jobs;
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Net;
 
 namespace HiringProject.Api.Modules
 {
@@ -30,12 +38,29 @@ namespace HiringProject.Api.Modules
             NewConfig<GetCompanyIdRequest, GetCompanyFromIdQuery>();
             NewConfig<DeleteCompanyIdRequest, DeleteCompanyFromIdCommand>();
             NewConfig<PostCompanyRequest, NewCompanyCommand>();
-
             //Job Controller
             NewConfig<GetJobIdRequest, GetJobFromIdQuery>();
             NewConfig<GetAllJobRequest, GetAllJobsFromCompanyIdQuery>();
             NewConfig<DeleteJobIdRequest, DeleteJobFromIdCommand>();
             NewConfig<PostJobRequest, NewJobCommand>();
+
+            //Data->Response
+            //Companies
+            NewConfig<Company, CompanyInfoResponse>();
+            //Jobs
+            NewConfig<Job, JobInfoResponse>();
+
+            //Exceptions
+            NewConfig<UnauthorizedAccessException, CustomHttpResponse>()
+                .Map(dest => dest.StatusCode, src => (int)HttpStatusCode.Unauthorized);
+            NewConfig<ValidationException, CustomHttpResponse>()
+                .Map(dest => dest.StatusCode, src => (int)HttpStatusCode.BadRequest);
+            NewConfig<AlreadyExistsException, CustomHttpResponse>()
+                .Map(dest => dest.StatusCode, src => (int)HttpStatusCode.BadRequest);
+            NewConfig<DataNotFoundException, CustomHttpResponse>()
+                .Map(dest => dest.StatusCode, src => (int)HttpStatusCode.NotFound);
+            NewConfig<Exception, CustomHttpResponse>()
+                .Map(dest => dest.StatusCode, src => (int)HttpStatusCode.InternalServerError);
 
         }
     }

@@ -30,7 +30,7 @@ namespace HiringProject.Business.Companies
             var company = (await _unitOfWork.CompanyRepository.FirstOrDefaultAsync(p => p.PhoneNumber == request.PhoneNumber));
             if (company != null)
             {
-                throw new AlreadyExistsException(nameof(request.PhoneNumber), request.PhoneNumber);
+                throw new AlreadyExistsException(nameof(company.Id), company.Id.ToString());
             }
             company = _mapper.Map<Company>(request);
             //TODO: Rules eklenecek.

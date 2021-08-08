@@ -1,5 +1,6 @@
 ﻿using HiringProject.Data.DataContext;
 using HiringProject.Data.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using System;
@@ -30,12 +31,18 @@ namespace HiringProject.Data.Repositories.Imp
 
         public virtual async Task<T> FirstOrDefaultAsync(Expression<Func<T, bool>> predicate)
         {
-            return await _collection.Find(predicate).FirstOrDefaultAsync();
+            //return await _collection.Find(predicate);
+            return await (predicate == null
+                ? _collection.AsQueryable()
+                : _collection.AsQueryable().Where(predicate))
+                .FirstOrDefaultAsync();
         }
 
         public virtual async Task<T> GetByIdAsync(string id)
         {
-            return await FirstOrDefaultAsync(x=> x.Id == id);
+            //var @event = await _collection.Find($"{{ _id: string('{id.ToString()}') }}").SingleAsync();
+            //var res = _collection.Find(Builders<T>.Filter.Eq("_id", id)).FirstOrDefaultAsync();
+            return await FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public virtual async Task<T> AddAsync(T entity)
