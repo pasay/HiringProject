@@ -26,7 +26,7 @@ namespace HiringProject.Business.Jobs
 
         public async Task<JobInfoResponse> Handle(DeleteJobFromIdCommand request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.JobRepository.DeleteAsync(request.Id);
+            var result = await _unitOfWork.JobRepository.DeleteByIdAsync(request.Id);
 
             return _mapper.Map<JobInfoResponse>(result);
         }

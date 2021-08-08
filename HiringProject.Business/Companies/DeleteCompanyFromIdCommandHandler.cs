@@ -26,7 +26,7 @@ namespace HiringProject.Business.Companies
 
         public async Task<CompanyInfoResponse> Handle(DeleteCompanyFromIdCommand request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.CompanyRepository.DeleteAsync(request.Id);
+            var result = await _unitOfWork.CompanyRepository.DeleteByIdAsync(request.Id);
 
             return _mapper.Map<CompanyInfoResponse>(result);
         }

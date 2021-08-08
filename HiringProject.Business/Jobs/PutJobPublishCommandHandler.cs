@@ -52,7 +52,7 @@ namespace HiringProject.Business.Jobs
             job.JobStatus = (int)JobStatusEnum.Published;
 
             await _mediator.Send(new DecrementPublishJobCountCompanyCommand() { Id = job.CompanyId }, cancellationToken);
-            var result = await _unitOfWork.JobRepository.UpdateAsync(job.Id, job);
+            var result = await _unitOfWork.JobRepository.UpdateByIdAsync(job.Id, job);
 
             return _mapper.Map<JobInfoResponse>(result);
         }

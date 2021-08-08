@@ -15,10 +15,10 @@ namespace HiringProject.Data.Repositories
         Task<T> GetByIdAsync(string id);
         Task<T> AddAsync(T entity);
         Task<bool> AddRangeAsync(IEnumerable<T> entities);
-        Task<T> UpdateAsync(string id, T entity);
-        Task<T> UpdateAsync(T entity, Expression<Func<T, bool>> predicate);
+        Task<T> UpdateByIdAsync(string id, T entity);
+        Task<T> UpdateExpressionAsync(T entity, Expression<Func<T, bool>> predicate);
         Task<T> DeleteAsync(T entity);
-        Task<T> DeleteAsync(string id);
-        Task<T> DeleteAsync(Expression<Func<T, bool>> predicate);
+        Task<T> DeleteByIdAsync(string id);
+        Task<T> DeleteExpressionAsync(Expression<Func<T, bool>> predicate);
     }
 }

@@ -23,7 +23,7 @@ namespace HiringProject.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<JobInfoResponse>))]
         public async Task<IActionResult> Get()
         {

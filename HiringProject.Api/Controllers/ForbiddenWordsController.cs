@@ -23,7 +23,7 @@ namespace HiringProject.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("all")]
+        [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<ForbiddenWordInfoResponse>))]
         public async Task<IActionResult> Get()
         {

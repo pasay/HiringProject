@@ -56,12 +56,12 @@ namespace HiringProject.Data.Repositories.Imp
             return (await _collection.BulkWriteAsync((IEnumerable<WriteModel<T>>)entities, options)).IsAcknowledged;
         }
 
-        public virtual async Task<T> UpdateAsync(string id, T entity)
+        public virtual async Task<T> UpdateByIdAsync(string id, T entity)
         {
-            return await UpdateAsync(entity, x => x.Id == id);
+            return await UpdateExpressionAsync(entity, x => x.Id == id);
         }
 
-        public virtual async Task<T> UpdateAsync(T entity, Expression<Func<T, bool>> predicate)
+        public virtual async Task<T> UpdateExpressionAsync(T entity, Expression<Func<T, bool>> predicate)
         {
             await _collection.ReplaceOneAsync(predicate, entity);
 
@@ -73,12 +73,12 @@ namespace HiringProject.Data.Repositories.Imp
             return await _collection.FindOneAndDeleteAsync(x => x.Id == entity.Id);
         }
 
-        public virtual async Task<T> DeleteAsync(string id)
+        public virtual async Task<T> DeleteByIdAsync(string id)
         {
             return await _collection.FindOneAndDeleteAsync(x => x.Id == id);
         }
 
-        public virtual async Task<T> DeleteAsync(Expression<Func<T, bool>> filter)
+        public virtual async Task<T> DeleteExpressionAsync(Expression<Func<T, bool>> filter)
         {
             return await _collection.FindOneAndDeleteAsync(filter);
         }

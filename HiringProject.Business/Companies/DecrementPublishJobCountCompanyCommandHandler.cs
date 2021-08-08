@@ -39,7 +39,7 @@ namespace HiringProject.Business.Companies
             }
             company.RemainPublishJobCount--;
 
-            var result = await _unitOfWork.CompanyRepository.UpdateAsync(company.Id, company);
+            var result = await _unitOfWork.CompanyRepository.UpdateByIdAsync(company.Id, company);
 
             return true;
         }

@@ -33,7 +33,7 @@ namespace HiringProject.Business.Companies
                 throw new DataNotFoundException(nameof(company.Id), company.Id.ToString());
             }
             company.RemainPublishJobCount = request.RemainPublishJobCount;
-            var result = await _unitOfWork.CompanyRepository.UpdateAsync(company.Id, company);
+            var result = await _unitOfWork.CompanyRepository.UpdateByIdAsync(company.Id, company);
 
             return _mapper.Map<CompanyInfoResponse>(result);
         }

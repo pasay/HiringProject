@@ -26,7 +26,7 @@ namespace HiringProject.Business.ForbiddenWords
 
         public async Task<ForbiddenWordInfoResponse> Handle(DeleteForbiddenWordCommand request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.ForbiddenWordRepository.DeleteAsync(p=> p.Word == request.Word);
+            var result = await _unitOfWork.ForbiddenWordRepository.DeleteExpressionAsync(p=> p.Word == request.Word);
 
             return _mapper.Map<ForbiddenWordInfoResponse>(result);
         }
