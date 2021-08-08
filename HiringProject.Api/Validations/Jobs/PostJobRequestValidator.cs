@@ -8,6 +8,12 @@ namespace Morhipo.Marketplace.External.API.Validations.Jobs
     {
         public PostJobRequestValidator()
         {
+
+            RuleFor(r => r.CompanyId)
+                .NotEmpty()
+                .GreaterThan(0)
+                ;
+
             RuleFor(r => r.Position)
                 .NotEmpty()
                 ;

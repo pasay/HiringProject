@@ -10,6 +10,7 @@ namespace HiringProject.Api.Modules
         {
             return services
                 .Configure<AppSettings>(configuration.GetSection(nameof(AppSettings)))
+                .Configure<MongoDbConnectionSettings>(configuration.GetSection(nameof(MongoDbConnectionSettings)))
                 ;
         }
     }

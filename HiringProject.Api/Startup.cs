@@ -60,6 +60,7 @@ namespace HiringProject.Api
 
             services.AddSettings(Configuration)
                     .AddServices(Configuration)
+                    .AddDatabaseServices(Configuration)
                     .AddValidations()
                     .AddMappers()
                     .AddSwaggers(WebHostEnvironment);

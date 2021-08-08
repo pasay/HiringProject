@@ -1,16 +1,19 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HiringProject.Model.Controllers.Jobs.Requests
+namespace HiringProject.Data.Models
 {
-    public class PostJobRequest
+    public class Job: MongoDbEntity
     {
-        public int CompanyId { get; set; }
+        public string CompanyId { get; set; }
         public string Position { get; set; }
         public string Description { get; set; }
+        [BsonDateTimeOptions]
         public DateTime TimeToLive { get; set; }
         public string FringeBenefits { get; set; }
         public string WorkType { get; set; }
