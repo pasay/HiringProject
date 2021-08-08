@@ -4,6 +4,7 @@ using HiringProject.Api.Modules;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +40,12 @@ namespace HiringProject.Api
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 
             services.AddControllers().AddNewtonsoftJson(p => p.SerializerSettings.Converters.Add(new StringEnumConverter()));
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+            });
+
             services.AddHealthChecks();
             services.AddLogging(logBuilder =>
             {

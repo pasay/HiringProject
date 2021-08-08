@@ -40,6 +40,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HiringProject.Model\HiringProject.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="HiringProject.Api.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
