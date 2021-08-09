@@ -1,6 +1,4 @@
-﻿using HiringProject.Business.Rules;
-using HiringProject.Data.Models;
-using HiringProject.Data.Repositories;
+﻿using HiringProject.Data.Repositories;
 using HiringProject.Exceptions;
 using HiringProject.Model.Commands.Companies;
 using HiringProject.Model.Commands.Jobs;
@@ -8,11 +6,7 @@ using HiringProject.Model.Controllers.Jobs.Responses;
 using HiringProject.Model.Enums;
 using MapsterMapper;
 using MediatR;
-using MongoDB.Bson;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

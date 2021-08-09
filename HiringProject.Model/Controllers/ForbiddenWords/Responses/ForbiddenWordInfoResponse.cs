@@ -1,7 +1,4 @@
-﻿using HiringProject.Model.Enums;
-using System;
-
-namespace HiringProject.Model.Controllers.ForbiddenWords.Responses
+﻿namespace HiringProject.Model.Controllers.ForbiddenWords.Responses
 {
     public class ForbiddenWordInfoResponse
     {

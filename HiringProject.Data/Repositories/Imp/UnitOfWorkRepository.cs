@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HiringProject.Data.Repositories.Imp
+﻿namespace HiringProject.Data.Repositories.Imp
 {
     public class UnitOfWorkRepository : IUnitOfWorkRepository
     {

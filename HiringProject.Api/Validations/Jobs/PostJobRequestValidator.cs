@@ -1,6 +1,5 @@
 using FluentValidation;
 using HiringProject.Model.Controllers.Jobs.Requests;
-using System;
 
 namespace Morhipo.Marketplace.External.API.Validations.Jobs
 {

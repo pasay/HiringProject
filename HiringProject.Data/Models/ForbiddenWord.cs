@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using System;
-
-namespace HiringProject.Data.Models
+﻿namespace HiringProject.Data.Models
 {
     public class ForbiddenWord : MongoDbEntity
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HiringProject.Model.Controllers.Jobs.Requests
+﻿namespace HiringProject.Model.Controllers.Jobs.Requests
 {
     public class PostJobRequest
     {

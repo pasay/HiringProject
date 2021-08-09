@@ -34,7 +34,8 @@ namespace HiringProject.Api.Modules
                     Contact = new OpenApiContact
                     {
                         Name = "Paþa Yazýcý",
-                        Email = "pasayazici@hotmail.com"
+                        Email = "pasayazici@hotmail.com",
+                        Url = new Uri("https://www.linkedin.com/in/pasayazici/")
                     }
                 });
 

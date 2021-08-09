@@ -3,11 +3,6 @@ using HiringProject.Model.Commands.ForbiddenWords;
 using HiringProject.Model.Controllers.ForbiddenWords.Responses;
 using MapsterMapper;
 using MediatR;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +21,7 @@ namespace HiringProject.Business.ForbiddenWords
 
         public async Task<ForbiddenWordInfoResponse> Handle(DeleteForbiddenWordCommand request, CancellationToken cancellationToken)
         {
-            var result = await _unitOfWork.ForbiddenWordRepository.DeleteExpressionAsync(p=> p.Word == request.Word);
+            var result = await _unitOfWork.ForbiddenWordRepository.DeleteExpressionAsync(p => p.Word == request.Word);
 
             return _mapper.Map<ForbiddenWordInfoResponse>(result);
         }

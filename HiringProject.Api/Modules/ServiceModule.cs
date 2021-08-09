@@ -13,7 +13,7 @@ namespace HiringProject.Api.Modules
         public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             var assembly = AppDomain.CurrentDomain.Load("HiringProject.Business");
-            
+
             return services
                     .AddMediatR(typeof(Startup))
                     .AddMediatR(assembly)

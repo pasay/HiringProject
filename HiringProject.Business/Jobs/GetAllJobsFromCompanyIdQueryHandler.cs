@@ -3,11 +3,8 @@ using HiringProject.Model.Controllers.Jobs.Responses;
 using HiringProject.Model.Queries.Jobs;
 using MapsterMapper;
 using MediatR;
-using MongoDB.Bson;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -32,7 +29,7 @@ namespace HiringProject.Business.Jobs
                 throw new KeyNotFoundException($"{nameof(request.CompanyId)}[{request.CompanyId}] not found.");
             }
 
-            var result = (await _unitOfWork.JobRepository.GetAsync(p=> p.CompanyId == request.CompanyId)).ToList();
+            var result = (await _unitOfWork.JobRepository.GetAsync(p => p.CompanyId == request.CompanyId)).ToList();
 
             return _mapper.Map<List<JobInfoResponse>>(result);
         }

@@ -1,14 +1,8 @@
-﻿using HiringProject.Data.Models;
-using HiringProject.Data.Repositories;
+﻿using HiringProject.Data.Repositories;
 using HiringProject.Exceptions;
 using HiringProject.Model.Commands.Companies;
-using HiringProject.Model.Controllers.Companies.Responses;
 using MapsterMapper;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

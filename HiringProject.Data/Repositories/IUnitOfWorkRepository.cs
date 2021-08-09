@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HiringProject.Data.Repositories
+﻿namespace HiringProject.Data.Repositories
 {
     public interface IUnitOfWorkRepository
     {

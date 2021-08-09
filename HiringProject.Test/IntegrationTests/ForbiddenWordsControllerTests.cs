@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using HiringProject.Data.Models;
+﻿using HiringProject.Data.Models;
 using HiringProject.Data.Repositories;
 using HiringProject.Model.Controllers.ForbiddenWords.Requests;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace HiringProject.Test.IntegrationTests

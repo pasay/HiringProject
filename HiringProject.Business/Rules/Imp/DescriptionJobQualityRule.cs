@@ -1,9 +1,7 @@
 ﻿using HiringProject.Data.Repositories;
 using HiringProject.Model.Commands.Jobs;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HiringProject.Business.Rules.Imp
@@ -21,7 +19,7 @@ namespace HiringProject.Business.Rules.Imp
         {
             //TODO: Sakıncalı kelimeler için ELK sorgulaması eklenecek.
             var forbiddenWords = await _unitOfWork.ForbiddenWordRepository.GetAsync();
-            return (newJobCommand.Description.Split(new string[] { " "}, StringSplitOptions.RemoveEmptyEntries).Any(p=> forbiddenWords.Any(f=> f.Word.Equals(p)))) ? 0 : Score;
+            return (newJobCommand.Description.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries).Any(p => forbiddenWords.Any(f => f.Word.Equals(p)))) ? 0 : Score;
         }
     }
 }

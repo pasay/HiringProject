@@ -3,10 +3,8 @@ using HiringProject.Model.Controllers.ForbiddenWords.Responses;
 using HiringProject.Model.Queries.ForbiddenWords;
 using MapsterMapper;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
