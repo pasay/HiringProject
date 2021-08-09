@@ -1,8 +1,31 @@
 version: '3.4'
+ 
+networks:
+ hiring-net:
 
 services:
+
+  mongo:
+    container_name: HiringProject.MongoDB
+    image: mongo
+    restart: always
+    networks:
+      - hiring-net
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: hireUser
+      MONGO_INITDB_ROOT_PASSWORD: hirePass
+    ports:
+      - "30001:27017"
+
   hiringproject.api:
     image: ${DOCKER_REGISTRY-}hiringprojectapi
+    restart: always
+    networks:
+      - hiring-net
     build:
       context: .
       dockerfile: HiringProject.Api/Dockerfile
+    ports:
+      - "30002:80"
+    depends_on:
+        - mongo
