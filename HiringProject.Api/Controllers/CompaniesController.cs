@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace HiringProject.Api.Controllers
 {
+    /// <summary>
+    /// Şirket bilgilerine ait işlemler için kullanılır
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CompaniesController : ControllerBase
@@ -23,6 +26,9 @@ namespace HiringProject.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Tanımlı olan tüm şirketlerin bilgisini verir.
+        /// </summary>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<CompanyInfoResponse>))]
         public async Task<IActionResult> Get()
@@ -32,6 +38,9 @@ namespace HiringProject.Api.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// ID bilgisi verilen şirketin bilgisini verir.
+        /// </summary>
         [HttpGet("{Id}")]
         [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
         public async Task<IActionResult> Get([FromRoute] GetCompanyIdRequest request)
@@ -40,6 +49,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// ID bilgisi verilen şirketi siler
+        /// </summary>
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete([FromRoute] DeleteCompanyIdRequest request)
         {
@@ -47,6 +59,10 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+
+        /// <summary>
+        /// Yeni bir şirketi tanımlamak için kullanılır
+        /// </summary>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
         public async Task<IActionResult> Post([FromBody] PostCompanyRequest request)
@@ -55,6 +71,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// ID Bilgisi verilen şirketin ilan yayınlama sayısını günceller.
+        /// </summary>
         [HttpPut]
         [ProducesResponseType(200, Type = typeof(CompanyInfoResponse))]
         public async Task<IActionResult> Put([FromBody] PutCompanyRemainPublishJobCountRequest request)

@@ -2,6 +2,9 @@
 {
     public class GetAllJobRequest
     {
+        /// <summary>
+        /// Listelenecek ilanların bağlı olduğu şirketin kayıt numarası
+        /// </summary>
         public string CompanyId { get; set; }
     }
 }

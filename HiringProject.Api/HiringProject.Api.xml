@@ -4,5 +4,95 @@
         <name>HiringProject.Api</name>
     </assembly>
     <members>
+        <member name="T:HiringProject.Api.Controllers.CompaniesController">
+            <summary>
+            Şirket bilgilerine ait işlemler için kullanılır
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.CompaniesController.Get">
+            <summary>
+            Tanımlı olan tüm şirketlerin bilgisini verir.
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.CompaniesController.Get(HiringProject.Model.Controllers.Companies.Requests.GetCompanyIdRequest)">
+            <summary>
+            ID bilgisi verilen şirketin bilgisini verir.
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.CompaniesController.Delete(HiringProject.Model.Controllers.Companies.Requests.DeleteCompanyIdRequest)">
+            <summary>
+            ID bilgisi verilen şirketi siler
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.CompaniesController.Post(HiringProject.Model.Controllers.Companies.Requests.PostCompanyRequest)">
+            <summary>
+            Yeni bir şirketi tanımlamak için kullanılır
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.CompaniesController.Put(HiringProject.Model.Controllers.Companies.Requests.PutCompanyRemainPublishJobCountRequest)">
+            <summary>
+            ID Bilgisi verilen şirketin ilan yayınlama sayısını günceller.
+            </summary>
+        </member>
+        <member name="T:HiringProject.Api.Controllers.ForbiddenWordsController">
+            <summary>
+            Yasaklı kelime işlemleri için kullanılır
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.ForbiddenWordsController.Get">
+            <summary>
+            Tüm yasaklı kelimeleri listeler
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.ForbiddenWordsController.Get(HiringProject.Model.Controllers.ForbiddenWords.Requests.GetForbiddenWordRequest)">
+            <summary>
+            Word bilgisi ile verilen yasaklı kelimeyi getirir
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.ForbiddenWordsController.Delete(HiringProject.Model.Controllers.ForbiddenWords.Requests.DeleteForbiddenWordRequest)">
+            <summary>
+            Word bilgisi ile iletilen yasaklı kelimeyi siler
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.ForbiddenWordsController.Post(HiringProject.Model.Controllers.ForbiddenWords.Requests.PostForbiddenWordRequest)">
+            <summary>
+            Yeni yasaklı kelime eklemeyi sağlar
+            </summary>
+        </member>
+        <member name="T:HiringProject.Api.Controllers.JobsController">
+            <summary>
+            İlan bilgilerine ait işlemler için kullanılır
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Get">
+            <summary>
+            Tanımlı olan tüm ilanların bilgisini verir.
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Get(HiringProject.Model.Controllers.Jobs.Requests.GetAllJobRequest)">
+            <summary>
+            CompanyId ile verilen şirkete ait tanımlı olan tüm ilanların bilgisini verir.
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Get(HiringProject.Model.Controllers.Jobs.Requests.GetJobIdRequest)">
+            <summary>
+            ID bilgisi verilen ilanın bilgisini verir.
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Delete(HiringProject.Model.Controllers.Jobs.Requests.DeleteJobIdRequest)">
+            <summary>
+            ID bilgisi verilen ilanı siler
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Post(HiringProject.Model.Controllers.Jobs.Requests.PostJobRequest)">
+            <summary>
+            Yeni bir ilan tanımlamak için kullanılır
+            </summary>
+        </member>
+        <member name="M:HiringProject.Api.Controllers.JobsController.Put(HiringProject.Model.Controllers.Jobs.Requests.PutJobPublishRequest)">
+            <summary>
+            Yeni tanımlanan (Created statüsündeki) bir ilanı yayınlamak için kullanılır.
+            </summary>
+        </member>
     </members>
 </doc>

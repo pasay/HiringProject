@@ -2,6 +2,9 @@
 {
     public class GetCompanyIdRequest
     {
+        /// <summary>
+        /// Listelenecek şirketin kayıt numarası
+        /// </summary>
         public string Id { get; set; }
     }
 }

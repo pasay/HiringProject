@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace HiringProject.Api.Controllers
 {
+    /// <summary>
+    /// İlan bilgilerine ait işlemler için kullanılır
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class JobsController : ControllerBase
@@ -23,6 +26,9 @@ namespace HiringProject.Api.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Tanımlı olan tüm ilanların bilgisini verir.
+        /// </summary>
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(List<JobInfoResponse>))]
         public async Task<IActionResult> Get()
@@ -31,6 +37,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// CompanyId ile verilen şirkete ait tanımlı olan tüm ilanların bilgisini verir.
+        /// </summary>
         [HttpGet("all/{CompanyId}")]
         [ProducesResponseType(200, Type = typeof(List<JobInfoResponse>))]
         public async Task<IActionResult> Get([FromRoute] GetAllJobRequest request)
@@ -39,6 +48,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// ID bilgisi verilen ilanın bilgisini verir.
+        /// </summary>
         [HttpGet("{Id}")]
         [ProducesResponseType(200, Type = typeof(JobInfoResponse))]
         public async Task<IActionResult> Get([FromRoute] GetJobIdRequest request)
@@ -47,6 +59,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// ID bilgisi verilen ilanı siler
+        /// </summary>
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete([FromRoute] DeleteJobIdRequest request)
         {
@@ -54,6 +69,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// Yeni bir ilan tanımlamak için kullanılır
+        /// </summary>
         [HttpPost]
         [ProducesResponseType(200, Type = typeof(JobInfoResponse))]
         public async Task<IActionResult> Post([FromBody] PostJobRequest request)
@@ -62,6 +80,9 @@ namespace HiringProject.Api.Controllers
             return Ok(await _mediator.Send(inRequest));
         }
 
+        /// <summary>
+        /// Yeni tanımlanan (Created statüsündeki) bir ilanı yayınlamak için kullanılır.
+        /// </summary>
         [HttpPut("Publish/{Id}")]
         [ProducesResponseType(200, Type = typeof(JobInfoResponse))]
         public async Task<IActionResult> Put([FromRoute] PutJobPublishRequest request)
